@@ -1,0 +1,14 @@
+node_modules
+.DS_Store
+*.log
+.vscode
+.idea
+*.swp
+/dist
+/target
+/out
+*.vsix
+*.exe
+*.dmg
+*.AppImage
+*.deb

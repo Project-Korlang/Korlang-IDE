@@ -1,0 +1,81 @@
+{
+  "name": "korlang-electron-ide",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist-electron/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"tsx electron/main.ts\"",
+    "build": "vite build && tsc --project tsconfig.json --outDir dist-electron --rootDir electron --module commonjs --target ES2020 --noEmit false",
+    "package": "electron-builder",
+    "lint": "eslint src electron --ext .ts,.tsx",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "^6.13.0",
+    "@codemirror/commands": "^6.3.3",
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/language": "^6.10.2",
+    "@codemirror/lint": "^6.7.0",
+    "@codemirror/state": "^6.4.1",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "@codemirror/view": "^6.26.3",
+    "@codemirror/vim": "^6.2.3",
+    "@lezer/highlight": "^1.2.0",
+    "@xterm/xterm": "^5.5.0",
+    "axios": "^1.7.2",
+    "node-pty": "^1.1.0-beta20",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vscode-jsonrpc": "^8.2.0",
+    "vscode-languageserver-protocol": "^3.17.5",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@playwright/test": "^1.46.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^8.2.2",
+    "electron": "^31.0.2",
+    "electron-builder": "^24.13.3",
+    "eslint": "^9.6.0",
+    "tsx": "^4.15.6",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.1"
+  },
+  "build": {
+    "appId": "io.korlang.ide",
+    "productName": "Korlang IDE",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "category": "Development"
+    },
+    "win": {
+      "target": ["nsis"]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "releaseType": "release"
+      }
+    ],
+    "fileAssociations": [
+      {
+        "ext": "kor",
+        "name": "Korlang Source",
+        "role": "Editor"
+      }
+    ]
+  }
+}

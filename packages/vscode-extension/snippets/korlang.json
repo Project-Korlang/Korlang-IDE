@@ -1,0 +1,17 @@
+{
+  "fn": {"prefix": "fn", "body": "fn ${1:name}(${2:args}) -> ${3:Type} {\n    ${0}\n}", "description": "Function"},
+  "struct": {"prefix": "struct", "body": "struct ${1:Name} {\n    ${0}\n}", "description": "Struct"},
+  "enum": {"prefix": "enum", "body": "enum ${1:Name} {\n    ${0}\n}", "description": "Enum"},
+  "match": {"prefix": "match", "body": "match ${1:expr} {\n    ${0}\n}", "description": "Match"},
+  "if": {"prefix": "if", "body": "if ${1:condition} {\n    ${0}\n}", "description": "If"},
+  "else": {"prefix": "else", "body": "else {\n    ${0}\n}", "description": "Else"},
+  "for": {"prefix": "for", "body": "for ${1:item} in ${2:iter} {\n    ${0}\n}", "description": "For"},
+  "while": {"prefix": "while", "body": "while ${1:condition} {\n    ${0}\n}", "description": "While"},
+  "import": {"prefix": "import", "body": "import ${1:module};", "description": "Import"},
+  "pub fn": {"prefix": "pub fn", "body": "pub fn ${1:name}(${2:args}) -> ${3:Type} {\n    ${0}\n}", "description": "Public function"},
+  "impl": {"prefix": "impl", "body": "impl ${1:Type} {\n    ${0}\n}", "description": "Impl block"},
+  "return": {"prefix": "return", "body": "return ${0};", "description": "Return"},
+  "let": {"prefix": "let", "body": "let ${1:name} = ${0};", "description": "Let binding"},
+  "const": {"prefix": "const", "body": "const ${1:NAME}: ${2:Type} = ${0};", "description": "Const"},
+  "test": {"prefix": "test", "body": "@test\nfn ${1:name}() {\n    ${0}\n}", "description": "Test"}
+}

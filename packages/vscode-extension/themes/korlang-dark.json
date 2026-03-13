@@ -1,0 +1,24 @@
+{
+  "name": "Korlang Dark",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#0f1115",
+    "editor.foreground": "#e6e6e6",
+    "editorLineNumber.foreground": "#4c5363",
+    "editor.selectionBackground": "#2a2f3a",
+    "editor.inactiveSelectionBackground": "#232833",
+    "editorCursor.foreground": "#e2c044",
+    "activityBar.background": "#0b0d12",
+    "sideBar.background": "#0d0f14",
+    "statusBar.background": "#0b0d12",
+    "statusBar.foreground": "#c9d1d9"
+  },
+  "tokenColors": [
+    { "scope": "keyword", "settings": { "foreground": "#ff7b72" } },
+    { "scope": "string", "settings": { "foreground": "#a5d6ff" } },
+    { "scope": "constant.numeric", "settings": { "foreground": "#f2cc60" } },
+    { "scope": "entity.name.function", "settings": { "foreground": "#d2a8ff" } },
+    { "scope": "entity.name.type", "settings": { "foreground": "#7ee787" } },
+    { "scope": "comment", "settings": { "foreground": "#8b949e", "fontStyle": "italic" } }
+  ]
+}

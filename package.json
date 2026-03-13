@@ -1,0 +1,18 @@
+{
+  "name": "korlang-ide",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build:lsp": "cargo build -p korlang-lsp",
+    "build:vscode": "pnpm -C packages/vscode-extension build",
+    "build:electron": "pnpm -C packages/electron-ide build",
+    "dev:electron": "pnpm -C packages/electron-ide dev",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "typescript": "^5.5.4"
+  }
+}

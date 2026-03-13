@@ -1,0 +1,67 @@
+{
+  "scopeName": "source.korlang",
+  "name": "Korlang",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#keywords" },
+    { "include": "#types" },
+    { "include": "#functions" },
+    { "include": "#structs" },
+    { "include": "#macros" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        { "name": "comment.line.double-slash.korlang", "match": "//.*$" },
+        { "name": "comment.block.korlang", "begin": "/\\*", "end": "\\*/" }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        { "name": "string.quoted.double.korlang", "begin": "\"", "end": "\"", "patterns": [
+          { "name": "constant.character.escape.korlang", "match": "\\\\(\\\\|\"|n|r|t|0|x[0-9A-Fa-f]{2}|u\{[0-9A-Fa-f]+\})" },
+          { "name": "variable.interpolation.korlang", "begin": "\\\\\{", "end": "\}" }
+        ]}
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        { "name": "constant.numeric.korlang", "match": "\\b(0x[0-9A-Fa-f]+|[0-9]+(\\.[0-9]+)?)\\b" }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        { "name": "keyword.control.korlang", "match": "\\b(fn|struct|enum|type|impl|trait|match|if|else|for|while|loop|return|break|continue|pub|use|import|mod|let|const|static|as|in|where)\\b" },
+        { "name": "constant.language.korlang", "match": "\\b(true|false|null)\\b" }
+      ]
+    },
+    "types": {
+      "patterns": [
+        { "name": "storage.type.korlang", "match": "\\b(Int|Int32|Int64|Float|Float32|Float64|Bool|String|Char|Vec|Map|Option|Result)\\b" }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        { "name": "entity.name.function.korlang", "match": "\\bfn\\s+([A-Za-z_][A-Za-z0-9_]*)" }
+      ]
+    },
+    "structs": {
+      "patterns": [
+        { "name": "entity.name.type.korlang", "match": "\\b(struct|enum)\\s+([A-Za-z_][A-Za-z0-9_]*)" }
+      ]
+    },
+    "macros": {
+      "patterns": [
+        { "name": "support.function.macro.korlang", "match": "\\b[A-Za-z_][A-Za-z0-9_]*!" }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        { "name": "keyword.operator.korlang", "match": "[+\\-*/%]=?|==|!=|<=|>=|&&|\\|\\||::|=>|->|\\." }
+      ]
+    }
+  }
+}

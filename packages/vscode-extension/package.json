@@ -1,0 +1,116 @@
+{
+  "name": "korlang-ide",
+  "displayName": "Korlang IDE",
+  "description": "Korlang language support, LSP, KPM browser, and build/run commands.",
+  "version": "0.1.0",
+  "publisher": "korlang",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Programming Languages"],
+  "icon": "icon.png",
+  "main": "./dist/extension.js",
+  "activationEvents": ["onLanguage:korlang"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "korlang",
+        "aliases": ["Korlang", "kor"],
+        "extensions": [".kor"],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icon.png",
+          "dark": "./icon.png"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "korlang",
+        "scopeName": "source.korlang",
+        "path": "./syntaxes/korlang.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      { "command": "korlang.build", "title": "Korlang: Build" },
+      { "command": "korlang.run", "title": "Korlang: Run" },
+      { "command": "korlang.new", "title": "Korlang: New Project" },
+      { "command": "korlang.install", "title": "Korlang: Install Package" },
+      { "command": "korlang.format", "title": "Korlang: Format" },
+      { "command": "korlang.kpmBrowser", "title": "Korlang: Open KPM Browser" }
+    ],
+    "keybindings": [
+      { "command": "korlang.build", "key": "ctrl+shift+b", "when": "editorTextFocus" },
+      { "command": "korlang.run", "key": "f5", "when": "editorTextFocus" }
+    ],
+    "configuration": {
+      "title": "Korlang",
+      "properties": {
+        "korlang.compilerPath": {
+          "type": "string",
+          "default": "korlang",
+          "description": "Path to the Korlang compiler binary."
+        },
+        "korlang.lspPath": {
+          "type": "string",
+          "default": "korlang-lsp",
+          "description": "Path to the Korlang LSP server binary."
+        },
+        "korlang.formatOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Format Korlang files on save."
+        },
+        "korlang.buildOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Build Korlang project on save."
+        }
+      }
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "korlang.build",
+          "when": "resourceExtname == .kor",
+          "group": "navigation"
+        },
+        {
+          "command": "korlang.run",
+          "when": "resourceExtname == .kor",
+          "group": "navigation"
+        }
+      ]
+    },
+    "snippets": [
+      {
+        "language": "korlang",
+        "path": "./snippets/korlang.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Korlang Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/korlang-dark.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "package": "vsce package -o dist/korlang-ide.vsix",
+    "lint": "eslint src --ext .ts",
+    "test": "node ./dist/test/runTest.js"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/vscode": "^1.90.0",
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^9.6.0",
+    "typescript": "^5.5.4",
+    "vsce": "^3.2.0"
+  }
+}
