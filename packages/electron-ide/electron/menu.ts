@@ -5,8 +5,14 @@ export function createMenu(window: BrowserWindow) {
     {
       label: 'File',
       submenu: [
-        { role: 'open' },
-        { role: 'save' },
+        {
+          label: 'Open File',
+          click: () => window.webContents.send('menu:openFile')
+        },
+        {
+          label: 'Open Folder',
+          click: () => window.webContents.send('menu:openFolder')
+        },
         { role: 'quit' }
       ]
     },

@@ -11,6 +11,8 @@ declare global {
       kpmInstall?: (cwd: string, pkg: string) => Promise<string>;
       installKorlang?: () => void;
       openExternal?: (url: string) => void;
+      onMenuOpenFile?: (handler: () => void) => () => void;
+      onMenuOpenFolder?: (handler: () => void) => () => void;
     };
   }
 }

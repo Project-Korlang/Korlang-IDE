@@ -1,7 +1,7 @@
 use crate::document::{parse_symbols, TextDocument};
 use std::fs;
 use std::path::PathBuf;
-use tower_lsp::lsp_types::{DocumentSymbol, Position, Range, SymbolInformation, SymbolKind, Url};
+use tower_lsp::lsp_types::{DocumentSymbol, Position, Range, SymbolInformation, Url};
 use walkdir::WalkDir;
 
 pub fn document_symbols(doc: &TextDocument) -> Vec<DocumentSymbol> {

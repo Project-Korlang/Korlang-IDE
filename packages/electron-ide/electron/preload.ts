@@ -8,7 +8,15 @@ const api = {
   run: (cwd: string) => ipcRenderer.invoke('korlang:run', cwd),
   kpmInstall: (cwd: string, pkg: string) => ipcRenderer.invoke('korlang:kpm', cwd, pkg),
   installKorlang: () => shell.openExternal('https://project-korlang.github.io/'),
-  openExternal: (url: string) => shell.openExternal(url)
+  openExternal: (url: string) => shell.openExternal(url),
+  onMenuOpenFile: (handler: () => void) => {
+    ipcRenderer.on('menu:openFile', handler);
+    return () => ipcRenderer.removeListener('menu:openFile', handler);
+  },
+  onMenuOpenFolder: (handler: () => void) => {
+    ipcRenderer.on('menu:openFolder', handler);
+    return () => ipcRenderer.removeListener('menu:openFolder', handler);
+  }
 };
 
 (window as any).korlang = api;

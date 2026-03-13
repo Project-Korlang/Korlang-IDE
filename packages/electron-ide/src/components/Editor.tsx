@@ -6,7 +6,7 @@ import { autocompletion, CompletionContext } from '@codemirror/autocomplete';
 import { lintGutter, linter, Diagnostic as CmdDiagnostic } from '@codemirror/lint';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { bracketMatching, indentOnInput } from '@codemirror/language';
-import { vim } from '@codemirror/vim';
+import { vim } from '@replit/codemirror-vim';
 import { useStore } from '../store';
 import { KorlangLspClient } from '../lsp/client';
 

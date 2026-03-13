@@ -135,7 +135,7 @@ impl LanguageServer for Backend {
         let uri = params.text_document_position.text_document.uri;
         let pos = params.text_document_position.position;
         let doc = self.documents.get(&uri);
-        let items = completion_items(doc.as_deref(), pos);
+        let items = completion_items(doc.as_ref(), pos);
         Ok(Some(CompletionResponse::Array(items)))
     }
 
@@ -143,7 +143,7 @@ impl LanguageServer for Backend {
         let uri = params.text_document_position_params.text_document.uri;
         let pos = params.text_document_position_params.position;
         let doc = self.documents.get(&uri);
-        Ok(hover_for_position(doc.as_deref(), pos))
+        Ok(hover_for_position(doc.as_ref(), pos))
     }
 
     async fn goto_definition(&self, params: GotoDefinitionParams) -> Result<Option<GotoDefinitionResponse>> {
@@ -151,7 +151,7 @@ impl LanguageServer for Backend {
         let pos = params.text_document_position_params.position;
         let root = self.workspace_root.lock().await.clone();
         let doc = self.documents.get(&uri);
-        Ok(find_definition(root, doc.as_deref(), pos).map(GotoDefinitionResponse::Scalar))
+        Ok(find_definition(root, doc.as_ref(), pos).map(GotoDefinitionResponse::Scalar))
     }
 
     async fn references(&self, params: ReferenceParams) -> Result<Option<Vec<Location>>> {
@@ -159,7 +159,7 @@ impl LanguageServer for Backend {
         let pos = params.text_document_position.position;
         let root = self.workspace_root.lock().await.clone();
         let doc = self.documents.get(&uri);
-        Ok(Some(find_references(root, doc.as_deref(), pos)))
+        Ok(Some(find_references(root, doc.as_ref(), pos)))
     }
 
     async fn document_symbol(&self, params: DocumentSymbolParams) -> Result<Option<DocumentSymbolResponse>> {
@@ -173,7 +173,7 @@ impl LanguageServer for Backend {
         }
     }
 
-    async fn workspace_symbol(&self, params: WorkspaceSymbolParams) -> Result<Option<Vec<SymbolInformation>>> {
+    async fn symbol(&self, params: WorkspaceSymbolParams) -> Result<Option<Vec<SymbolInformation>>> {
         let root = self.workspace_root.lock().await.clone();
         Ok(Some(workspace_symbols(root, &params.query)))
     }
@@ -181,7 +181,7 @@ impl LanguageServer for Backend {
     async fn formatting(&self, params: DocumentFormattingParams) -> Result<Option<Vec<TextEdit>>> {
         let uri = params.text_document.uri;
         let doc = self.documents.get(&uri);
-        Ok(format_document(doc.as_deref()))
+        Ok(format_document(doc.as_ref()))
     }
 
     async fn code_action(&self, params: CodeActionParams) -> Result<Option<CodeActionResponse>> {
@@ -239,7 +239,7 @@ impl LanguageServer for Backend {
         let pos = params.text_document_position.position;
         let root = self.workspace_root.lock().await.clone();
         let doc = self.documents.get(&uri);
-        let edits = crate::references::rename_symbol(root, doc.as_deref(), pos, &params.new_name);
+        let edits = crate::references::rename_symbol(root, doc.as_ref(), pos, &params.new_name);
         Ok(Some(WorkspaceEdit { changes: Some(edits), ..Default::default() }))
     }
 
@@ -247,13 +247,13 @@ impl LanguageServer for Backend {
         let uri = params.text_document_position_params.text_document.uri;
         let pos = params.text_document_position_params.position;
         let doc = self.documents.get(&uri);
-        Ok(crate::hover::signature_help(doc.as_deref(), pos))
+        Ok(crate::hover::signature_help(doc.as_ref(), pos))
     }
 }
 
 impl SymbolKindEx for SymbolKind {
     fn as_completion_kind(&self) -> CompletionItemKind {
-        match self {
+        match *self {
             SymbolKind::FUNCTION => CompletionItemKind::FUNCTION,
             SymbolKind::STRUCT => CompletionItemKind::STRUCT,
             SymbolKind::ENUM => CompletionItemKind::ENUM,
